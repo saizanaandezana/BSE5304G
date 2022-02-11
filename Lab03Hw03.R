@@ -392,3 +392,11 @@ NSE_bmlt6
 NSE_bmlt12
 NSE_tlag
 NSE_AWC
+# Qmm and Qpred Plot
+pdf("Simulated flow.pdf")
+ggplot(TMWB, aes(x=date)) +
+  geom_line(aes(y=Qmm, colour="Qmm"), size=1) +
+  geom_line(aes(y=Qpred, colour="Qpred"), size=1) +
+  scale_y_continuous(name = "Depth (mm/day)",) +
+  ggtitle("Observed and simulated Discharge in mm")
+dev.off()
