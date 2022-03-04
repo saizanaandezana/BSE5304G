@@ -255,12 +255,12 @@ TIC05 = CNmodel(CNmodeldf = TIC05, CNavg=VSAsol$CN[1],
 #
 # First, let's look at the differences in flow for different CNs
 Phw2 <- ggplot() +
-  geom_line(data=TIC01,aes(x=date, y = Qmm, linetype = "dashed")) +
-  geom_line(data=TIC01,aes(x=date, y = Qpred*0.2,colour="Qpred_TIC01")) +
-  geom_line(data=TIC02,aes(x=date, y = Qpred*0.2,colour="Qpred_TIC02")) +
-  geom_line(data=TIC03,aes(x=date, y = Qpred*0.2,colour="Qpred_TIC03")) +
-  geom_line(data=TIC04,aes(x=date, y = Qpred*0.2,colour="Qpred_TIC04")) +
+  geom_line(data=TIC05,aes(x=date, y = Qmm, linetype = "dashed")) +
   geom_line(data=TIC05,aes(x=date, y = Qpred*0.2,colour="Qpred_TIC05")) +
+  geom_line(data=TIC04,aes(x=date, y = Qpred*0.2,colour="Qpred_TIC04")) +
+  geom_line(data=TIC03,aes(x=date, y = Qpred*0.2,colour="Qpred_TIC03")) +
+  geom_line(data=TIC02,aes(x=date, y = Qpred*0.2,colour="Qpred_TIC02")) +
+  geom_line(data=TIC01,aes(x=date, y = Qpred*0.2,colour="Qpred_TIC01")) +
   labs(x = 'Date', y = 'Flow (mm)', linetype = "Observed flow", colour = "Estimated")+
   ggtitle("simple CN-VSA model")
 
@@ -286,6 +286,15 @@ Phw3 <- ggplot() +
 pdf("Phw3.pdf")
 Phw3
 dev.off()
+Average_AW <- data.frame(TIC5meanAW = mean(TIC05$AW), TIC4meanAW = mean(TIC04$AW), 
+                         TIC3meanAW = mean(TIC03$AW), TIC2meanAW = mean(TIC02$AW),
+                         TIC1meanAW = mean(TIC01$AW), 
+                         TIC5minAW = min(TIC05$AW), TIC4minAW = min(TIC04$AW), 
+                         TIC3minAW = min(TIC03$AW), TIC2minAW = min(TIC02$AW),
+                         TIC1minAW = min(TIC01$AW),
+                         TIC5maxAW = max(TIC05$AW), TIC4maxAW = max(TIC04$AW), 
+                         TIC3maxAW = max(TIC03$AW), TIC2maxAW = max(TIC02$AW),
+                         TIC1maxAW = max(TIC01$AW))
 
 #############################
 #####Graduate HW #######
