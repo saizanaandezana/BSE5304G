@@ -542,7 +542,32 @@ ggplot(DPLT, aes(x = date)) +
 dev.off()
 
 ################  HW4
+###Dan's Solution
+mean(TIC03$DS) # kg/m^2/d
+mean(c(18.5,3.7))*2000/1000 # [mg/kg] * 2000 [kg/m^3] / 1000[mg/kg] ): [kg/m^3]
+.1 * .2 * mean(c(18.5,3.7))*2000/1000 # 20% of 10% of 1m , .02m * kg/m^3 = [kg/m^2]
+.444/mean(TIC03$DS)/365
 
+
+
+rcp01=mean(TIC01$DF+TIC01$DS)*365
+rcp02=mean(TIC02$DF+TIC02$DS)*365
+rcp03=mean(TIC03$DF+TIC03$DS)*365
+rcp04=mean(TIC04$DF+TIC04$DS)*365
+rcp05=mean(TIC05$DF+TIC05$DS)*365
+
+plot(TIC)
+
+m <- c(1,rcp01,
+       2,rcp02,
+       3,rcp03, 
+       4,rcp04, 
+       5,rcp05)
+rclmat <- matrix(m, ncol=2, byrow=TRUE)
+rc <- reclassify(TIC, rclmat)
+plot(rc)
+#################################################
+### mysolution
 library(tidyverse)
 library(raster)
 library(sf)
@@ -576,3 +601,4 @@ tm_shape(TIC2)+
   tm_compass(type = "8star", position = c("left", "bottom")) +
   tm_scale_bar() 
 dev.off()
+##################################
