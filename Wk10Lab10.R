@@ -10,10 +10,9 @@ setwd("~/Wk10Lab10/")
 # https://owi.usgs.gov/R/dataRetrieval.html
 # https://owi.usgs.gov/R/training-curriculum/usgs-packages/dataRetrieval-readNWIS/
 #
-?dataRetrieval  # Review the man page for this package
-?readNWISuv
-?readNWISdv
-?readNWISdata
+sites <- whatNWISsites(bBox=c(-113.581, 35.743,-111.680,36.528),  # search for USGS sites using Bbox
+                       parameterCd=c("00065","00060"),
+                       hasDataTypeCd="uv")
 #
 # Need to figure out which data to download. 
 # https://nwis.waterdata.usgs.gov/nwis/pmcodes?radio_pm_search=param_group&pm_group=All+--+include+all+parameter+groups&pm_search=&casrn_search=&srsname_search=&format=html_table&show=parameter_group_nm&show=parameter_nm&show=casrn&show=srsname&show=parameter_units
