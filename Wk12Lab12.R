@@ -364,8 +364,6 @@ dev.off()
  # Using the net_2 NN model
 ###############################################################
 
-
-
 dat_2=data.frame(Qm3ps=CNmodelnew$Qmm,
                Jday=strptime(CNmodelnew$date,"%Y-%m-%d")$yday+1,Precip=CNmodelnew$P,
                TMX=CNmodelnew$MaxTemp,TMN=CNmodelnew$MinTemp,
@@ -404,10 +402,14 @@ scaled <- scale(forcast_df, center = datmin, scale = datmax - datmin)
 index_3 <- seq(1, nrow(forcast_df)-4)
 train_index_3 <- sample(index_3, 0.8*length(index_3))
 train_3 <- scaled[train_index_3,]
-test_3 <- scaled[-train_index,]
+test_3 <- scaled[-train_index_3,]
 
 
-NNForecast = predict(net_1, test_3[940:943, c("Qm3ps_lag","Precip","jdate","Jday","TMX","TMN")])
+NNForecast = predict(net, test_3[900:903, c("Qm3ps_lag","Precip","jdate","Jday","TMX","TMN")])
 unscaled_NNForecast = (NNForecast * (max(dat_2$Qm3ps) - min(dat_2$Qm3ps))) + min(dat_2$Qm3ps)
 rownames(unscaled_NNForecast) = c("thursday", "friday", "saturday", "sunday")
 colnames(unscaled_NNForecast) = c("Qpred")
+
+forcast_df = forcast_df[4492:4495,]
+forcast_df$Qforecast = unscaled_NNForecast[,1]
+rownames(forcast_df) = c("thursday", "friday", "saturday", "sunday")
